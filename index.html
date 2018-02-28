@@ -12,10 +12,7 @@
 
 <body>
 
-	<script>
-		alert("Olá mundo");
-		console.log("Ola mundo no console")
-	</script>
+
 
 
 	<header>
@@ -80,6 +77,14 @@
 
 		</section>
 	</main>
+
+	<script>
+		console.log(document.querySelector("h1")); //<h1>texto</h1>
+		var titulo = document.querySelector("h1");
+		console.log(titulo);
+
+		titulo.textContent = "Banana";
+	</script>
 
 </body>
 
