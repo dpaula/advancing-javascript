@@ -1,39 +1,36 @@
 var titulo = document.querySelector(".titulo");
 console.log(titulo);
 
-var paciente = document.querySelector("#primeiro-paciente");
-var tdPeso = paciente.querySelector(".info-peso");
-var peso = tdPeso.textContent;
+var pacientes = document.querySelectorAll(".paciente");
 
-var tdAltura = paciente.querySelector(".info-altura");
-var altura = tdAltura.textContent;
+for(var i = 0; i < pacientes.length ; i++){
+    var paciente = pacientes[i];
+    var tdPeso = paciente.querySelector(".info-peso");
+    var tdAltura = paciente.querySelector(".info-altura");
 
-var tdGordura = paciente.querySelector(".info-gordura");
-var gordura = tdGordura.textContent;
+    var tdImc = paciente.querySelector(".info-imc");
 
-var imc = peso / (altura*altura);
+    var peso = tdPeso.textContent;
+    var altura = tdAltura.textContent;
 
-var tdImc = paciente.querySelector(".info-imc");
-tdImc.textContent = imc;
+    var alturaEhValida = true;
+    var pesoEhValido = true;
 
-var pesoEhValido = true;
-var alturaEhValida = true;
+    if(peso <= 0 || peso > 1000){
+        console.log("Peso inválido");
+        tdImc.textContent = "Peso inválido!";
+        pesoEhValido = false;
+    }
 
-if (peso <= 0 || peso >= 1000) {
-    console.log("Peso inválido!");
-    pesoEhValido = false;
-    tdImc.textContent = "Peso inválido!";
-}
+    if(altura <= 0 || altura >= 1000){
+        console.log("Altura inválida");
+        tdImc.textContent = "Altura inválida!";
+        alturaEhValida = false;
+    }
 
-if (altura <= 0 || altura >= 3.00){
-    console.log("Altura inválida!");
-    alturaEhValida = false;
-    tdImc.textContent = "Altura inválida!";
-}
-
-if (alturaEhValida && pesoEhValido){
-    var imc = peso / (altura * altura);
-    tdImc.textContent = imc;
-}
-
-console.log(paciente);
+    if(pesoEhValido && alturaEhValida){
+        var imc = peso / ( altura * altura);    
+        tdImc.textContent = imc.toFixed(2);
+    }    
+} 
+    
