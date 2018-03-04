@@ -16,7 +16,7 @@ for(var i = 0; i < pacientes.length ; i++){
     var alturaEhValida = true;
     var pesoEhValido = true;
 
-    if(peso <= 0 || peso > 1000){
+    if(peso <= 0 || peso > 400){
         console.log("Peso inválido");
         tdImc.textContent = "Peso inválido!";
         pesoEhValido = false;
