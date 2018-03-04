@@ -19,8 +19,11 @@ botaoAdicionar.addEventListener("click", function(event){
     
     var paciente = obtemPaciente(formu);
 
-    if(!pacienteValido(paciente)){
-        console.log("paciente invalido");
+    let erros = pacienteValido(paciente);
+
+    if(erros){
+        let erro = document.querySelector("#mensagem-erro");
+        erro.textContent = erros[0];
         return;
     }
 
@@ -72,5 +75,15 @@ function obtemPaciente(formu){
 }
 
 function pacienteValido(paciente) {
-    return pesoEhValido(paciente.PESO) && alturaEhValida(paciente.ALTURA);
+    let erros = [];
+
+    if(!pesoEhValido(paciente.PESO)){
+        erros.push("Peso inválido!");
+    } 
+    
+    if(!alturaEhValida(paciente.ALTURA)){
+        erros.push("Altura inválida!");
+    }
+
+    return erros;
 }
