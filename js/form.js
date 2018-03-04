@@ -4,7 +4,7 @@ var formu = document.querySelector("#form-adiciona");
 
 var nomeTd2 = formu.nome;
 //criando um novo listener para ao mudar o foco do campo edit nome, ele carrege os dados
-nomeTd2.addEventListener("blur", function(){
+nomeTd2.addEventListener("blur", function () {
     formu.peso.value = '77'
     formu.altura.value = '1.75'
     formu.gordura.value = '20'
@@ -13,30 +13,41 @@ nomeTd2.addEventListener("blur", function(){
 //pegando o componente
 var botaoAdicionar = document.querySelector("#adicionar-paciente");
 //criando evento de click para o botão
-botaoAdicionar.addEventListener("click", function(event){
+botaoAdicionar.addEventListener("click", function (event) {
     //anulando função default
     event.preventDefault();
-    
+
     var paciente = obtemPaciente(formu);
 
     let erros = pacienteValido(paciente);
 
-    if(erros){
-        let erro = document.querySelector("#mensagem-erro");
-        erro.textContent = erros[0];
+    let ul = document.querySelector("#mensagem-erro");
+    if (erros.length > 0) {
+        ul.innerHTML = "";
+        incluiErros(erros, ul)
         return;
     }
-
+    
     var pacienteTr = montaTr(paciente);
     
     var tabela = document.querySelector("#tabela-pacientes");
     tabela.appendChild(pacienteTr);
-
+    
     //limpa os campos do form
     formu.reset();
+    ul.innerHTML = "";
 });
 
-function montaTr(paciente){
+function incluiErros(erros, ul) {
+    erros.forEach(erro => {
+
+        let erroLi = document.createElement("li");
+        erroLi.textContent = erro;
+        ul.appendChild(erroLi);
+    });
+}
+
+function montaTr(paciente) {
 
     //criando uma tag tr
     var pacienteTr = document.createElement("tr");
@@ -52,7 +63,7 @@ function montaTr(paciente){
     return pacienteTr;
 }
 
-function montaTd(dado, classe){
+function montaTd(dado, classe) {
 
     var td = document.createElement("td");
     td.textContent = dado;
@@ -61,8 +72,8 @@ function montaTd(dado, classe){
     return td;
 }
 
-function obtemPaciente(formu){
-    
+function obtemPaciente(formu) {
+
     const paciente = {
         NOME: formu.nome.value,
         PESO: formu.peso.value,
@@ -77,11 +88,24 @@ function obtemPaciente(formu){
 function pacienteValido(paciente) {
     let erros = [];
 
-    if(!pesoEhValido(paciente.PESO)){
+    if (!paciente.NOME.length) {
+        erros.push("Nome em branco!");
+    }
+    if (!paciente.PESO.length) {
+        erros.push("Peso em branco!");
+    }
+    if (!paciente.ALTURA.length) {
+        erros.push("Altura em branco!");
+    }
+    if (!paciente.GORDURA.length) {
+        erros.push("Gordura em branco!");
+    }
+
+    if (!pesoEhValido(paciente.PESO)) {
         erros.push("Peso inválido!");
-    } 
-    
-    if(!alturaEhValida(paciente.ALTURA)){
+    }
+
+    if (!alturaEhValida(paciente.ALTURA)) {
         erros.push("Altura inválida!");
     }
 
