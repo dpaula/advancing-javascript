@@ -8,8 +8,15 @@ tabela.addEventListener("dblclick", function (event) {
     let alvoEvento = event.target;
     //pega o componente pai do alvo clicado
     let paiDoAlvo = alvoEvento.parentNode;
-    //remove o componennte (tr)
-    paiDoAlvo.remove();
+    //inclui classe css para apagar a linha em 5s
+    paiDoAlvo.classList.add("fadeOut");
+    
+    //espera 5 segundos para executar a linha
+    setTimeout(() => {
+        // remove o componennte (tr)
+        paiDoAlvo.remove();
+    }, 500);
+
 });
 
 //incluindo evento de duplo clique em um paciente, e removendo o mesmo

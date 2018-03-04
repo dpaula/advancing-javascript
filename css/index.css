@@ -140,3 +140,9 @@ button[disabled=disabled], button:disabled {
 #mensagem-erro{
 	color: red;
 }
+
+/* classe que apaga o conteudo durante 5 segundos */
+.fadeOut{
+	opacity: 0;
+	transition: 0.5s;
+}
