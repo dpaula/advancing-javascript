@@ -31,21 +31,11 @@ for(var i = 0; i < pacientes.length ; i++){
 } 
 
 function alturaEhValida(altura){
-    let ret = altura > 0 && altura < 3;
-    if(ret){
-        return true;
-    }
-    console.log("Altura invalida: "+altura);
-    return false;
+    return (altura > 0 && altura < 3);
 }
 
 function pesoEhValido(peso){
-    let ret = peso > 5 && peso < 400;
-    if(ret){
-        return true;
-    }
-    console.log("Peso invalido: "+peso);
-    return false;
+    return (peso > 5 && peso < 400);
 }
 
 function calculaImc(altura, peso){
