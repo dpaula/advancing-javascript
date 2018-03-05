@@ -28,15 +28,19 @@ botaoAdicionar.addEventListener("click", function (event) {
         return;
     }
     
-    var pacienteTr = montaTr(paciente);
-    
-    var tabela = document.querySelector("#tabela-pacientes");
-    tabela.appendChild(pacienteTr);
+    adicionaPacienteTabela(paciente);
     
     //limpa os campos do form
     formu.reset();
     ul.innerHTML = "";
 });
+
+function adicionaPacienteTabela(paciente) {
+    var pacienteTr = montaTr(paciente);
+    
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
+}
 
 function incluiErros(erros, ul) {
     erros.forEach(erro => {
@@ -54,11 +58,11 @@ function montaTr(paciente) {
     pacienteTr.classList.add("paciente");
 
     //conectando as tags td como filha da tr
-    pacienteTr.appendChild(montaTd(paciente.NOME, "info-nome"));
-    pacienteTr.appendChild(montaTd(paciente.PESO, "info-peso"));
-    pacienteTr.appendChild(montaTd(paciente.ALTURA, "info-altura"));
-    pacienteTr.appendChild(montaTd(paciente.GORDURA, "info-gordura"));
-    pacienteTr.appendChild(montaTd(paciente.IMC, "info-imc"));
+    pacienteTr.appendChild(montaTd(paciente.nome, "info-nome"));
+    pacienteTr.appendChild(montaTd(paciente.peso, "info-peso"));
+    pacienteTr.appendChild(montaTd(paciente.altura, "info-altura"));
+    pacienteTr.appendChild(montaTd(paciente.gordura, "info-gordura"));
+    pacienteTr.appendChild(montaTd(paciente.imc, "info-imc"));
 
     return pacienteTr;
 }
@@ -75,11 +79,11 @@ function montaTd(dado, classe) {
 function obtemPaciente(formu) {
 
     const paciente = {
-        NOME: formu.nome.value,
-        PESO: formu.peso.value,
-        ALTURA: formu.altura.value,
-        GORDURA: formu.gordura.value,
-        IMC: calculaImc(formu.altura.value, formu.peso.value)
+        nome: formu.nome.value,
+        peso: formu.peso.value,
+        altura: formu.altura.value,
+        gordura: formu.gordura.value,
+        imc: calculaImc(formu.altura.value, formu.peso.value)
     }
 
     return paciente;
@@ -88,24 +92,24 @@ function obtemPaciente(formu) {
 function pacienteValido(paciente) {
     let erros = [];
 
-    if (!paciente.NOME.length) {
+    if (!paciente.nome.length) {
         erros.push("Nome em branco!");
     }
-    if (!paciente.PESO.length) {
+    if (!paciente.peso.length) {
         erros.push("Peso em branco!");
     }
-    if (!paciente.ALTURA.length) {
+    if (!paciente.altura.length) {
         erros.push("Altura em branco!");
     }
-    if (!paciente.GORDURA.length) {
+    if (!paciente.gordura.length) {
         erros.push("Gordura em branco!");
     }
 
-    if (!pesoEhValido(paciente.PESO)) {
+    if (!pesoEhValido(paciente.peso)) {
         erros.push("Peso inválido!");
     }
 
-    if (!alturaEhValida(paciente.ALTURA)) {
+    if (!alturaEhValida(paciente.altura)) {
         erros.push("Altura inválida!");
     }
 

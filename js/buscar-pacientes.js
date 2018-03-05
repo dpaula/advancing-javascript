@@ -12,8 +12,16 @@ btBuscarPaciente.addEventListener("click", function () {
 
     //cria evento para carregar a url e trazer os dados
     xhr.addEventListener("load", function () {
-        //imprime o conteudo como texto
-        console.log(xhr.responseText);
+        //pegando a resposta da requisição
+        var resposta = xhr.responseText;
+        //convertendo o texto de json para objeto
+        var pacientes = JSON.parse(resposta);
+
+        pacientes.forEach(paciente => {
+            //incluindo na tabela
+            adicionaPacienteTabela(paciente);
+        });
+
     });
 
     //envia a requisição
