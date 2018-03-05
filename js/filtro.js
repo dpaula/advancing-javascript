@@ -9,9 +9,14 @@ filtro.addEventListener("input", function (){
     pacientes.forEach(paciente =>{
         //pega o nome (conteudo do campo que tem a classe info-nome)
         var nome = paciente.querySelector(".info-nome").textContent;
-        //se o nome do campo da tabela for igula ao campo digitado na pesquisa
+
+        //usando pesquisa com expressão regular, passando o campo que quero q valide na busca
+        //e dizendo q será case Insensitive
+        let expressao = new RegExp(this.value, "i");
+
+        //testando se o nome tem alguma letra da expressao
         //ou não tem nada, então remove a classe q deixa a linha invisivel
-        if(nome == this.value || this.value.length == 0){
+        if(expressao.test(nome) || this.value.length == 0){
             paciente.classList.remove("invisivel");
         }else{
             //senão inclui uma classe css q deixa a linha invisivel
